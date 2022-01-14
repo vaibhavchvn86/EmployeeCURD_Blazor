@@ -1,0 +1,68 @@
+﻿.mainbox {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.emplogo{
+    display: flex;
+    color: olivedrab;
+    font-size: medium;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+.header {
+    width: 80px;
+}
+
+.logoimg {
+    width: 50px;
+    height: 50px;
+}
+.box {
+    display: flex;
+}
+
+.content {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+deltable {
+    border-radius: 8px;
+    background-color: gainsboro;
+    display: flex;
+    align-items: center;
+    width: 500px;
+    height: max-content;
+}
+
+.body11 {
+    border: 1px solid grey;
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.tr {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.tr1 {
+    width: 100%;
+    display: flex;
+    justify-content: flex-start;
+    flex-direction: column;
+}
+
+.btns1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}

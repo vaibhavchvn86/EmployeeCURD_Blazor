@@ -1,0 +1,110 @@
+﻿@page "/addemp"
+
+@using EmployeeCURD.Data
+@using DataLayer.Data
+@using ServiceLayer.Services
+@inject IServiceEmployee serviceEmp
+@inject NavigationManager navigate
+
+<form>
+    <EditForm Model="@emp" OnSubmit="@AddEmp">
+        <div class="emplogo">
+            <img class="logoimg" src="./css/Assets/logo.png" />
+            <p class="header"><b>Employee Payroll</b></p>
+        </div>
+        <div class="create">
+            <div class="logo">
+                <h2>Employee Registration</h2>
+            </div>
+            <div class="register">
+                <div class="name">
+                    <label for="name"><b>Name : </b></label>
+                    <input class="ip" type="text" placeholder="Employee Name" @bind-value="@emp.Name" />
+                </div>
+                <div class="profile">
+                    <label for="profile"><b>Profile Image : </b></label>
+                    <div class="img">
+                        <div>
+                            <input type="checkbox" name="profile" value="./css/Assets/Ellipse -1.png"
+                                   @onchange="@(()=> addimg("./css/Assets/Ellipse -1.png"))" />
+                            <img src="./css/Assets/Ellipse -1.png" />
+                        </div>
+                        <div>
+                            <input type="checkbox" name="profile" value="./css/Assets/Ellipse -10.png" 
+                                   @onchange="@(()=> addimg("./css/Assets/Ellipse -10.png"))"/>
+                            <img src="./css/Assets/Ellipse -10.png" />
+                        </div>
+                        <div>
+                            <input type="checkbox" name="profile" value="./css/Assets/Ellipse -5.png" 
+                                   @onchange="@(()=> addimg("./css/Assets/Ellipse -5.png"))"/>
+                            <img src="./css/Assets/Ellipse -5.png" />
+                        </div>
+                        <div>
+                            <input type="checkbox" name="profile" value="./css/Assets/Ellipse -8.png" 
+                                   @onchange="@(()=> addimg("./css/Assets/Ellipse -8.png"))"/>
+                            <img src="./css/Assets/Ellipse -8.png" />
+                        </div>
+                    </div>
+                </div>
+                <div class="gender">
+                    <label for="gender"><b>Gender : </b></label>
+                    <select class="ip" name="gender" id="gender" @bind="@emp.Gender">
+                        <option value="--">-- Select Gender --</option>
+                        <option value="Male">Male</option>
+                        <option value="Female">Female</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="depart">
+                    <label for="depart"><b>Department : </b></label>
+                    <select class="ip" name="depart" id="depart" @bind="@emp.Department">
+                        <option value="--">-- Select Department --</option>
+                        <option value="HR">HR</option>
+                        <option value="Admin">Admin</option>
+                        <option value="IT">IT</option>
+                        <option value="Acc">Accounts</option>
+                        <option value="Sales">Sales & Marketing</option>
+                    </select>
+                </div>
+                <div class="salary">
+                    <label for="salary"><b>Salary : </b></label>
+                    <input class="ip" @bind="@emp.Salary" type="number" defaultvalue="360000" min="200000" max="800000" step="1000"/>
+                </div>
+                <div class="date">
+                    <label for="date"><b>Start-Date : </b></label>
+                    <input class="ip" @bind="@emp.StartDate" type="date" placeholder="" />
+                </div>
+                <div class="note">
+                    <label for="note"><b>Notes : </b></label>
+                    <textarea name="note" rows="4" cols="47" @bind="@emp.Note"></textarea>
+                </div>
+                <div class="btn1">
+                    <button class="btn btn-outline-success"> Register </button>
+                    <button class="btn btn-outline-danger " @onclick="@(() => home())"> Cancle </button>
+                    <button class="btn btn-outline-primary " @onclick="@(()=>reset())"> Reset </button>
+                </div>
+            </div>
+        </div>
+    </EditForm>
+</form>
+
+@code {
+    EmployeeModel emp = new EmployeeModel();
+    protected void AddEmp()
+    {
+        serviceEmp.AddEmp(emp);
+        navigate.NavigateTo("/getempdata");
+    }
+    protected void addimg(string img)
+    {
+        emp.ProfileImg = img;
+    }
+    protected void reset()
+    {
+        navigate.NavigateTo("/addemp");
+    }
+    protected void home()
+    {
+        navigate.NavigateTo("/getempdata");
+    }
+}

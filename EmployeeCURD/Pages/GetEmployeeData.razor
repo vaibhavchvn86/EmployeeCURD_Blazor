@@ -1,0 +1,81 @@
+﻿@page "/getempdata"
+
+@using DataLayer.Data
+@using ServiceLayer.Services
+@inject IServiceEmployee service
+@inject NavigationManager navigate
+
+<form>
+    <div class="mainbox">
+        <div class="emplogo">
+            <img class="logoimg" src="./css/Assets/logo.png" />
+            <p class="header"><b>Employee Payroll</b></p>
+        </div>
+        <h1 class="h1">Employee Data</h1>
+        <div>
+            <p>Employee Data from the server is displayed below.</p>
+            <p>
+                <a class="btn btn-outline-success btn-sm" href='/addemp/@Emp.EmployeeId' role="button">Add Employee</a>
+            </p>
+        </div>
+        @if (EmpMod == null)
+        {
+            <p><em>Loading...</em></p>
+        }
+        else
+        {
+            <table class='table'>
+                <thead class="headcolor">
+                    <tr>
+                        <th>Employee ID</th>
+                        <th>Name</th>
+                        <th>Department</th>
+                        <th>Salary</th>
+                        <th>Notes</th>
+                        <th>Edit | Delete</th>
+                    </tr>
+                </thead>
+                <tbody class="body">
+                    @foreach (var emp in EmpMod)
+                    {
+                        <tr>
+                            <td>@emp.EmployeeId</td>
+                            <td>@emp.Name</td>
+                            <td>@emp.Department</td>
+                            <td>@emp.Salary</td>
+                            <td>@emp.Note</td>
+                            <td>
+                                @*<button class="addbtn" @onclick="@(()=>edit(CurrentID))"> Edit </button>   |
+                                    <button class="cbtn " @onclick="@(()=>DelEmp(CurrentID))"> Delete </button>*@
+                                <a class="btn btn-outline-primary btn-sm" href='/editemp/@emp.EmployeeId' role="button">Edit</a>
+                                <a class="btn btn-outline-danger btn-sm" href='/delemp/@emp.EmployeeId' role="button">Delete</a>
+                            </td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        }
+    </div>
+</form>
+
+
+@code {
+    List<EmployeeModel> EmpMod = new List<EmployeeModel>();
+    EmployeeModel Emp = new EmployeeModel();
+
+    [Parameter]
+    public string CurrentID { get; set; }
+
+    protected override async Task OnInitializedAsync()
+    {
+        EmpMod = await Task.Run(() => service.GetAllEmp());
+    }
+    void edit(string CurrentID)
+    {
+        navigate.NavigateTo("/editemp/" + CurrentID);
+    }
+    void DelEmp(string CurrentID)
+    {
+        navigate.NavigateTo("/delemp/" + CurrentID);
+    }
+}

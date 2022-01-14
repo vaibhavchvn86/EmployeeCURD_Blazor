@@ -1,0 +1,102 @@
+﻿.create {
+    border: 1px solid grey;
+    border-radius: 8px;
+    background-color:gainsboro;
+    width: auto;
+    height: 550px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    padding: 10px;
+}
+
+.emplogo {
+    display: flex;
+    color: olivedrab;
+    font-size:medium;
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+.header{
+    width:80px;
+}
+
+.logoimg {
+    width: 50px;
+    height: 50px;
+}
+
+.logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+    font-family:'Times New Roman', Times, serif;
+}
+
+.register {
+    width: 600px;
+    height: 600px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+
+.ip {
+    width: 400px;
+    height: 30px;
+}
+
+.name{
+    display: flex;
+    justify-content: space-between;
+}
+
+.profile {
+    display: flex;
+    justify-content: space-between;
+}
+
+.pimg {
+    width: 40px;
+    height: 40px;
+}
+
+.img {
+    display: flex;
+    justify-content: space-between;
+    width: 400px;
+    height: 30px;
+}
+
+.gender {
+    display: flex;
+    justify-content: space-between;
+}
+
+.depart {
+    display: flex;
+    justify-content: space-between;
+}
+
+.salary {
+    display: flex;
+    justify-content: space-between;
+}
+
+.date {
+    display: flex;
+    justify-content: space-between;
+}
+
+.note {
+    display: flex;
+    justify-content: space-between;
+}
+
+.btn1 {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 20px;
+}
