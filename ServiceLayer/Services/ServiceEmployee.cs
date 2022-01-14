@@ -21,6 +21,14 @@ namespace ServiceLayer.Services
             Employee = database.GetCollection<EmployeeModel>("Employee");
         }
 
+        //// Other method to get databse details.
+        //public ServiceEmployee(IOptions<DBservice> setting)
+        //{
+        //    var client = new MongoClient(setting.Value.ConnectionString);
+        //    var database = client.GetDatabase(setting.Value.DatabaseName);
+        //    Employee = database.GetCollection<EmployeeModel>("Employee");
+        //}
+
         public EmployeeModel AddEmp(EmployeeModel Emp)
         {
             try

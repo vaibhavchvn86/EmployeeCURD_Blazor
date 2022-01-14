@@ -39,6 +39,7 @@ namespace EmployeeCURD
             services.AddSingleton<IDBservice>(sp =>
                 sp.GetRequiredService<IOptions<DBservice>>().Value);
             services.AddTransient<IServiceEmployee, ServiceEmployee>();
+           
             //services.Configure<DBservice>(Options=> {
             //    Options.ConnectionString = Configuration.GetSection("DBservice:ConnectionString").Value;
             //    Options.ConnectionString = Configuration.GetSection("DBservice:DatabaseName").Value;
