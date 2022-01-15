@@ -6,6 +6,11 @@
 @inject IServiceEmployee serviceEmp
 @inject NavigationManager navigate
 
+@if (CheckSubmit)
+{
+    <p class="alert-warning">Register Successfully</p>
+}
+
 <form>
     <EditForm Model="@emp" OnSubmit="@AddEmp">
         <div class="emplogo">
@@ -19,7 +24,8 @@
             <div class="register">
                 <div class="name">
                     <label for="name"><b>Name : </b></label>
-                    <input class="ip" type="text" placeholder="Employee Name" @bind-value="@emp.Name" />
+                    <input class="ip" type="text" placeholder="Employee Name" @bind-value="@emp.Name" required />
+                    @*<error-output class="name-error" for="name"></error-output>*@
                 </div>
                 <div class="profile">
                     <label for="profile"><b>Profile Image : </b></label>
@@ -30,25 +36,25 @@
                             <img src="./css/Assets/Ellipse -1.png" />
                         </div>
                         <div>
-                            <input type="checkbox" name="profile" value="./css/Assets/Ellipse -10.png" 
-                                   @onchange="@(()=> addimg("./css/Assets/Ellipse -10.png"))"/>
+                            <input type="checkbox" name="profile" value="./css/Assets/Ellipse -10.png"
+                                   @onchange="@(()=> addimg("./css/Assets/Ellipse -10.png"))" />
                             <img src="./css/Assets/Ellipse -10.png" />
                         </div>
                         <div>
-                            <input type="checkbox" name="profile" value="./css/Assets/Ellipse -5.png" 
-                                   @onchange="@(()=> addimg("./css/Assets/Ellipse -5.png"))"/>
+                            <input type="checkbox" name="profile" value="./css/Assets/Ellipse -5.png"
+                                   @onchange="@(()=> addimg("./css/Assets/Ellipse -5.png"))" />
                             <img src="./css/Assets/Ellipse -5.png" />
                         </div>
                         <div>
-                            <input type="checkbox" name="profile" value="./css/Assets/Ellipse -8.png" 
-                                   @onchange="@(()=> addimg("./css/Assets/Ellipse -8.png"))"/>
+                            <input type="checkbox" name="profile" value="./css/Assets/Ellipse -8.png"
+                                   @onchange="@(()=> addimg("./css/Assets/Ellipse -8.png"))" />
                             <img src="./css/Assets/Ellipse -8.png" />
                         </div>
                     </div>
                 </div>
                 <div class="gender">
                     <label for="gender"><b>Gender : </b></label>
-                    <select class="ip" name="gender" id="gender" @bind="@emp.Gender">
+                    <select class="ip" name="gender" id="gender" @bind="@emp.Gender" required>
                         <option value="--">-- Select Gender --</option>
                         <option value="Male">Male</option>
                         <option value="Female">Female</option>
@@ -68,7 +74,7 @@
                 </div>
                 <div class="salary">
                     <label for="salary"><b>Salary : </b></label>
-                    <input class="ip" @bind="@emp.Salary" type="number" defaultvalue="360000" min="200000" max="800000" step="1000"/>
+                    <input class="ip" @bind="@emp.Salary" type="number" defaultvalue="360000" min="200000" max="800000" step="1000" required />
                 </div>
                 <div class="date">
                     <label for="date"><b>Start-Date : </b></label>
@@ -107,4 +113,6 @@
     {
         navigate.NavigateTo("/getempdata");
     }
+
+    public bool CheckSubmit = true;
 }
