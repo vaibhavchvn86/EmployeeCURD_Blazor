@@ -4,11 +4,12 @@ using Microsoft.Extensions.Options;
 using MongoDB.Driver;
 using MongoDB.Driver.Linq;
 using ServiceLayer;
+using ServiceLayer.Services;
 using System;
 using System.Collections.Generic;
 using System.Text;
 
-namespace ServiceLayer.Services
+namespace DataAccessLayer
 {
     public class ServiceEmployee : IServiceEmployee
     {

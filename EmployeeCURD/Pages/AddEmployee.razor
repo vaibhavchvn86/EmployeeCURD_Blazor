@@ -3,13 +3,15 @@
 @using EmployeeCURD.Data
 @using DataLayer.Data
 @using ServiceLayer.Services
+@*@using Blazorise.Snackbar*@
+@using MatBlazor
+
 @inject IServiceEmployee serviceEmp
 @inject NavigationManager navigate
-
-@if (CheckSubmit)
-{
-    <p class="alert-warning">Register Successfully</p>
-}
+@*@if (CheckSubmit)
+    {
+        <p class="alert-warning">Register Successfully</p>
+    }*@
 
 <form>
     <EditForm Model="@emp" OnSubmit="@AddEmp">
@@ -85,9 +87,28 @@
                     <textarea name="note" rows="4" cols="47" @bind="@emp.Note"></textarea>
                 </div>
                 <div class="btn1">
-                    <button class="btn btn-outline-success"> Register </button>
+                    <button @*Color="Color.Primary" @onclick="@(()=>snackbarPrimary.Show())" *@ class="btn btn-outline-success"> Register </button>
                     <button class="btn btn-outline-danger " @onclick="@(() => home())"> Cancle </button>
                     <button class="btn btn-outline-primary " @onclick="@(()=>reset())"> Reset </button>
+                    @*<Snackbar @ref="snackbarPrimary" Color="SnackbarColor.Warning">
+                            <SnackbarBody>
+                                Employee Registered Successfully.
+                            </SnackbarBody>
+                        </Snackbar>
+                        <Snackbar @ref="snackbarSecondary" Color="SnackbarColor.Warning">
+                            <SnackbarBody>
+                                Employee not Registered & moved to Home.
+                            </SnackbarBody>
+                        </Snackbar>*@
+                    <MatSnackbar @bind-IsOpen="@snackBarIsOpen">
+                        <MatSnackbarContent>Employee Registered Successfully.</MatSnackbarContent>
+                    </MatSnackbar>
+                    <MatSnackbar @bind-IsOpen="@snackBarIsOpen1">
+                        <MatSnackbarContent>Cancled And Return to Dashboard</MatSnackbarContent>
+                    </MatSnackbar>
+                    <MatSnackbar @bind-IsOpen="@snackBarIsOpen2">
+                        <MatSnackbarContent>Registered Entries Reset</MatSnackbarContent>
+                    </MatSnackbar>
                 </div>
             </div>
         </div>
@@ -95,10 +116,16 @@
 </form>
 
 @code {
+    bool snackBarIsOpen = false;
+    bool snackBarIsOpen1 = false;
+    bool snackBarIsOpen2 = false;
+
     EmployeeModel emp = new EmployeeModel();
     protected void AddEmp()
     {
         serviceEmp.AddEmp(emp);
+        snackBarIsOpen = true;
+        this.StateHasChanged();
         navigate.NavigateTo("/getempdata");
     }
     protected void addimg(string img)
@@ -107,10 +134,14 @@
     }
     protected void reset()
     {
+        snackBarIsOpen1 = true;
+        this.StateHasChanged();
         navigate.NavigateTo("/addemp");
     }
     protected void home()
     {
+        snackBarIsOpen2 = true;
+        this.StateHasChanged();
         navigate.NavigateTo("/getempdata");
     }
 

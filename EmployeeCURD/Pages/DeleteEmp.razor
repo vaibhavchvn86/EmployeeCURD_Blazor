@@ -2,6 +2,8 @@
 
 @using DataLayer.Data
 @using ServiceLayer.Services
+@using MatBlazor
+
 @inject IServiceEmployee service
 @inject NavigationManager navigate
 
@@ -43,6 +45,12 @@
                     <div class="btns1">
                         <button class="btn btn-outline-danger "> Yes </button>
                         <button class="btn btn-outline-warning " @onclick="@(()=> Cancle())"> No </button>
+                        <MatSnackbar @bind-IsOpen="@snackBarIsOpen">
+                            <MatSnackbarContent>Employee Deleted Successfully.</MatSnackbarContent>
+                        </MatSnackbar>
+                        <MatSnackbar @bind-IsOpen="@snackBarIsOpen1">
+                            <MatSnackbarContent>Cancled And Return to Dashboard</MatSnackbarContent>
+                        </MatSnackbar>
                     </div>
                 </div>
             </div>
@@ -51,6 +59,10 @@
 </form>
 
 @code {
+
+    bool snackBarIsOpen = false;
+    bool snackBarIsOpen1 = false;
+
     [Parameter]
     public string EmpId { get; set; }
 
@@ -59,10 +71,14 @@
     protected void Delemp()
     {
         service.DeleteEmp(EmpId);
+        snackBarIsOpen = true;
+        this.StateHasChanged();
         navigate.NavigateTo("/getempdata");
     }
     protected void Cancle()
     {
+        snackBarIsOpen1 = true;
+        this.StateHasChanged();
         navigate.NavigateTo("/getempdata");
     }
     protected override async Task OnInitializedAsync()
