@@ -1,5 +1,7 @@
+using DataAccessLayer;
 using DataLayer.Data;
 using EmployeeCURD.Data;
+using MatBlazor;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Components;
 using Microsoft.AspNetCore.Hosting;
@@ -32,6 +34,7 @@ namespace EmployeeCURD
             services.AddRazorPages();
             services.AddServerSideBlazor();
             services.AddSingleton<WeatherForecastService>();
+            services.AddMatBlazor();
 
             services.Configure<DBservice>(
                 Configuration.GetSection(nameof(DBservice)));
